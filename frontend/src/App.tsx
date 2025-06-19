@@ -1,5 +1,4 @@
 import React from 'react';
-// This is a test comment to increase commit count
 import { Routes, Route } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
