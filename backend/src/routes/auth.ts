@@ -25,22 +25,27 @@ router.post('/register', async (req, res) => {
     await newUser.save();
 
     // Generate JWT token
-    const token = jwt.sign(
-      { id: newUser._id },
-      process.env.JWT_SECRET || 'fallback_secret',
-      { expiresIn: '30d' }
-    );
+    try {
+      const token = jwt.sign(
+        { id: newUser._id },
+        process.env.JWT_SECRET || 'fallback_secret',
+        { expiresIn: '30d' }
+      );
 
-    res.status(201).json({
-      token,
-      user: {
-        id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-        profilePicture: newUser.profilePicture,
-        bio: newUser.bio,
-      },
-    });
+      res.status(201).json({
+        token,
+        user: {
+          id: newUser._id,
+          username: newUser.username,
+          email: newUser.email,
+          profilePicture: newUser.profilePicture,
+          bio: newUser.bio,
+        },
+      });
+    } catch (tokenError) {
+      console.error('Error generating token during registration:', tokenError);
+      return res.status(500).json({ message: 'Token generation failed' });
+    }
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -65,22 +70,27 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET || 'fallback_secret',
-      { expiresIn: '30d' }
-    );
+    try {
+      const token = jwt.sign(
+        { id: user._id },
+        process.env.JWT_SECRET || 'fallback_secret',
+        { expiresIn: '30d' }
+      );
 
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        profilePicture: user.profilePicture,
-        bio: user.bio,
-      },
-    });
+      res.json({
+        token,
+        user: {
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          profilePicture: user.profilePicture,
+          bio: user.bio,
+        },
+      });
+    } catch (tokenError) {
+      console.error('Error generating token during login:', tokenError);
+      return res.status(500).json({ message: 'Token generation failed' });
+    }
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Server error' });
