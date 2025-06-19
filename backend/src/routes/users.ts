@@ -74,6 +74,9 @@ router.post('/follow/:id', auth, async (req, res) => {
     }
 
     const currentUser = await User.findById(req.user._id);
+    if (!currentUser) {
+      return res.status(404).json({ message: 'Current user not found' });
+    }
     
     // Check if already following
     if (currentUser.following.includes(userToFollow._id)) {
@@ -110,6 +113,9 @@ router.post('/unfollow/:id', auth, async (req, res) => {
     }
 
     const currentUser = await User.findById(req.user._id);
+    if (!currentUser) {
+      return res.status(404).json({ message: 'Current user not found' });
+    }
     
     // Check if not following
     if (!currentUser.following.includes(userToUnfollow._id)) {
