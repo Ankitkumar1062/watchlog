@@ -3,6 +3,7 @@
   "name": "ReadWatch",
   "version": "1.0.0",
   "description": "Automatically track and share your reading and watching history with AI-powered summaries",
+  "homepage_url": "https://github.com/Ankitkumar1062/watchlog",
   "permissions": [
     "storage",
     "tabs",
