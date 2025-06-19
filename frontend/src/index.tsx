@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
+    {/* React.StrictMode helps identify potential problems in an application. */}
     <Router>
       <AuthProvider>
         <App />
