@@ -23,3 +23,5 @@ ReadWatch is a platform that helps users automatically track and share the artic
 1. Navigate to the backend directory:
 
 ### Development
+
+This section outlines how to set up the development environment for ReadWatch.
