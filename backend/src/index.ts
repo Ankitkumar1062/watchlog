@@ -13,7 +13,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: '*'
+};
+app.use(cors(corsOptions));
 
 // Database connection
 mongoose
